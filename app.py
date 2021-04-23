@@ -1,7 +1,8 @@
 import speech_recognition_file
 import util
 from flask import Flask, render_template, request, redirect, url_for, jsonify
-
+from waitress import serve
+import os
 app = Flask(__name__)
 
 sentence = ''
@@ -55,4 +56,8 @@ def getISLFromText():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # app.run(debug=True)
+    app.run()
+    # port = int(os.environ.get('PORT', 5000))
+    # print(port)
+    # serve(app, host='0.0.0.0', port=port)
