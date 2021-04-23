@@ -34,7 +34,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 # os.environ['STANFORD_MODELS'] = os.path.join(BASE_DIR,
 #                                              'stanford-parser-full-2018-10-17/edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz')
 # os.environ['NLTK_DATA'] = '/usr/local/share/nltk_data/'
-os.environ['JAVAHOME'] = 'C:\\Program Files\\Java\\jdk1.8.0_221\\bin\\java.exe'
+# os.environ['JAVAHOME'] = 'C:\\Program Files\\Java\\jdk1.8.0_221\\bin\\java.exe'
 # print(os.environ.get('CLASSPATH'))
 
 with open("data_dict.pickle", "rb") as input_file:
