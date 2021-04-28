@@ -25,23 +25,20 @@ nltk.download('punkt')
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
-# __file__ = "D:\\Final Year Project\\Final year project demo\\util"
-# BASE_DIR = os.path.dirname(os.path.realpath(__file__))
-# print(BASE_DIR)
-# # Download zip file from https://nlp.stanford.edu/software/stanford-parser-full-2015-04-20.zip and extract in
-# # stanford-parser-full-2015-04-20 folder in higher directory
-# os.environ['CLASSPATH'] = os.path.join(BASE_DIR, 'stanford-parser-full-2018-10-17')
-# os.environ['STANFORD_MODELS'] = os.path.join(BASE_DIR,
-#                                              'stanford-parser-full-2018-10-17/edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz')
+BASE_DIR = os.getcwd()
+print(BASE_DIR)
+# Download zip file from https://nlp.stanford.edu/software/stanford-parser-full-2015-04-20.zip and extract in stanford-parser-full-2015-04-20 folder in higher directory
+os.environ['CLASSPATH'] = os.path.join(BASE_DIR, 'stanford-parser-full-2018-10-17')
+os.environ['STANFORD_MODELS'] = os.path.join(BASE_DIR, 'stanford-parser-full-2018-10-17/edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz')
 # os.environ['NLTK_DATA'] = '/usr/local/share/nltk_data/'
-os.environ['JAVAHOME'] = 'C:\\Program Files\\Java\\jdk1.8.0_221\\bin\\java.exe'
-# print(os.environ.get('CLASSPATH'))
+# os.environ['JAVAHOME'] = 'C:\\Program Files\\Java\\jdk1.8.0_221\\bin\\java.exe'
+print(os.environ.get('CLASSPATH'))
 
 with open("data_dict.pickle", "rb") as input_file:
     data_dict = cPickle.load(input_file)
 
-with open("parser.pickle", "rb") as input_file:
-    parser = cPickle.load(input_file)
+# with open("parser.pickle", "rb") as input_file:
+#     parser = cPickle.load(input_file)
 
 lemmatizer = WordNetLemmatizer()
 
@@ -165,7 +162,7 @@ def convert_eng_to_isl(input_string):
         return list(input_string.split(' '))
 
     # Initializing stanford parser
-    # parser = StanfordParser()
+    parser = StanfordParser()
 
     # Generates all possible parse trees sort by probability for the sentence
     possible_parse_tree_list = [tree for tree in parser.parse(input_string.split())]
