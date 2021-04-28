@@ -52,12 +52,14 @@ def getISLFromText():
     text = str(request.args['query'])
     isl_gloss_list, links = util.getISL(text)
     isl_gloss = ' '.join(isl_gloss_list)
-    return isl_gloss + '<br><br><br>' + ', '.join(links)
+    return jsonify(links)
 
 
 if __name__ == "__main__":
     # app.run(debug=True)
-    app.run()
+    app.run(
+
+    )
     # port = int(os.environ.get('PORT', 5000))
     # print(port)
     # serve(app, host='0.0.0.0', port=port)

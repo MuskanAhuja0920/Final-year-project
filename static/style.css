@@ -12,6 +12,7 @@ p {
 .iframe-container{
               position: relative;
               width: 100%;
+              padding-left: 56.25%;
               padding-bottom: 56.25%;
               height: 0;
             }
@@ -175,7 +176,6 @@ figure {
 }
 .bg-text {
   background-image: url('980x500.jpg');
-
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

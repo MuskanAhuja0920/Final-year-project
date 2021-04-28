@@ -8,7 +8,8 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body style="overflow-x: hidden;">
 <!-- partial:index.partial.html -->
@@ -52,7 +53,7 @@
 <!--    <div class="d-flex justify-content-center">-->
 
       <div class="w3-row-padding">
-<!--        <div class = 'container'>-->
+        <div class = 'container'>
 <!--            <div class = 'row'>-->
 <!--          <div class="w3-third"> dfdsfdsf</div>-->
           <div class="w3-third">
@@ -76,7 +77,7 @@
       </div> -->
       <!-- <div class="p-2">
       </div> -->
-<div class="w3-third">
+<div class="w3-third" >
 <!--    <div class = 'col'>-->
         <div class = 'iframe-container'>
             <div id="player"></div>
@@ -92,7 +93,7 @@
 <!--      <p>hfgvsghdvfgbvshbsdhbvdchvdgh</p>-->
 <!--    </div>-->
 </div>
-<!--  </div>-->
+  </div>
 
 
 
@@ -134,6 +135,7 @@
     }
     // 4. The API will call this function when the video player is ready.
     function onPlayerReady(event) {
+<!--      console.log(event);-->
       event.target.playVideo();
     }
 
@@ -165,6 +167,13 @@
           i++;
           console.log(i);
           }
+          else {
+          player.loadVideoById({videoId: 'gVRqPhuDkaQ',
+                     startSeconds:0,
+                      endSeconds:10})
+<!--          player.stopVideo();-->
+          i = 0;
+          }
           }
       //}
     }
@@ -172,9 +181,13 @@
       player.stopVideo();
     }
 
+
     function getVideoData() {
         videos = localStorage.getItem("links").split(',');
         console.log('in html');
+        console.log('starting video');
+        i = 0;
+        player.playVideo();
         console.log(videos);
     }
   </script>
