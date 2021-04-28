@@ -9,6 +9,24 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <!--    <link rel="stylesheet" type="text/css" href="style.css">-->
     <link rel="stylesheet" href="{{url_for('static', filename = 'style.css')}}">
+
+      <style>
+          .iframe-container{
+              position: relative;
+              width: 100%;
+              padding-bottom: 56.25%;
+              height: 0;
+            }
+            .iframe-container iframe{
+              position: absolute;
+              top:0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+            }
+
+      </style>
+
   </head>
   <body>
     <h1>Indian Sign Language Generator</h1>
@@ -34,9 +52,9 @@
 <!--    <iframe width="420" height="315" id = 'youtubePlayer'-->
 <!--        src="http://www.youtube.com/embed/1f6OchgCQrE?start=0&end=3?enablejsapi=1&autoplay=1&playlist=1f6OchgCQrE,Zux-Hazhhqo,7Vn_Dto8Vq4">-->
 <!--    </iframe>-->
-
+<div class = 'iframe-container'>
     <div id="player"></div>
-
+</div>
     <script>
         var videos = ['gVRqPhuDkaQ'];
       // 2. This code loads the IFrame Player API code asynchronously.

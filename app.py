@@ -1,7 +1,7 @@
 import speech_recognition_file
 import util
 from flask import Flask, render_template, request, redirect, url_for, jsonify
-from waitress import serve
+# from waitress import serve
 import os
 app = Flask(__name__)
 
@@ -11,7 +11,7 @@ video_links = []
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
+    return render_template('home.html')
 
 
 @app.route('/sentences', methods=['GET', 'POST'])
