@@ -3,6 +3,7 @@ import util
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 # from waitress import serve
 import os
+
 app = Flask(__name__)
 
 sentence = ''
@@ -22,6 +23,16 @@ def api_message():
     print('recording saved')
     global sentence
     sentence = speech_recognition_file.convert_speech_to_text()
+    message = {'sentence': sentence}
+    return jsonify(message)
+
+
+@app.route('/ChangeSentenceFunction', methods=['GET', 'POST'])
+def change_sentence():
+    global sentence
+    print(str(request.data)[2:-1])
+    sentence = str(request.data)[2:-1]
+
     message = {'sentence': sentence}
     return jsonify(message)
 

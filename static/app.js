@@ -12,12 +12,14 @@ var audioContext //audio context to help us record
 var recordButton = document.getElementById("recordButton");
 var stopButton = document.getElementById("stopButton");
 var pauseButton = document.getElementById("pauseButton");
+var changeText = document.getElementById("changeText");
+
 
 //add events to those 2 buttons
 recordButton.addEventListener("click", startRecording);
 stopButton.addEventListener("click", stopRecording);
 pauseButton.addEventListener("click", pauseRecording);
-
+changeText.addEventListener("click", changeTextFunction);
 
 function startRecording() {
 	console.log("recordButton clicked");
@@ -34,8 +36,9 @@ function startRecording() {
 	*/
 
 	recordButton.disabled = true;
+	changeText.disabled =true;
 	stopButton.disabled = false;
-	pauseButton.disabled = false
+	pauseButton.disabled = false;
 
 	/*
     	We're using the standard promise based getUserMedia() 
@@ -54,7 +57,7 @@ function startRecording() {
 		audioContext = new AudioContext();
 
 		//update the format 
-		document.getElementById("formats").innerHTML="Format: 1 channel pcm @ "+audioContext.sampleRate/1000+"kHz"
+		document.getElementById("formats").innerHTML="Start Speaking Now";
 
 		/*  assign to gumStream for later use  */
 		gumStream = stream;
@@ -77,7 +80,8 @@ function startRecording() {
 	  	//enable the record button if getUserMedia() fails
     	recordButton.disabled = false;
     	stopButton.disabled = true;
-    	pauseButton.disabled = true
+    	pauseButton.disabled = true;
+    	changeText.disabled =false;
 	});
 }
 
@@ -102,6 +106,7 @@ function stopRecording() {
 	stopButton.disabled = true;
 	recordButton.disabled = false;
 	pauseButton.disabled = true;
+	changeText.disabled =false;
 
 	//reset button just in case the recording is stopped while paused
 	pauseButton.innerHTML="Pause";
@@ -118,7 +123,24 @@ function stopRecording() {
 	rec.exportWAV(getSentence);
 
 }
+function changeTextFunction() {
+	console.log("Change Text clicked");
+	console.log(document.getElementById('speechToText').value);
+    fetch("/ChangeSentenceFunction", {
+        method: "post",
+        body: document.getElementById('speechToText').value
+    }).then(function (response) {
+          return response.json();
+      }).then(function (text) {
+          console.log('New Post response:');
+          console.log(text.sentence);
+          document.getElementById('speechToText').value = text.sentence;
+          getISL();
+      })
 
+
+
+}
 function getSentence(blob) {
     // sends data to flask url /messages as a post with data blob - in format for wav file, hopefully. it is a promise
     fetch("/sentences", {
@@ -129,9 +151,18 @@ function getSentence(blob) {
       }).then(function (text) {
           console.log('POST response:');
           console.log(text.sentence);
+          console.log(text.sentence.lower=="error");
+          if(text.sentence=="Error")
+      {
+
+        alert("Could Not identify Audio. Please try again.");
+      }
           document.getElementById('speechToText').value = text.sentence;
           getISL();
       })
+
+
+
 }
 
 function getISL() {
@@ -146,14 +177,14 @@ function getISL() {
 }
 var youtube_links;
 function getVideo() {
-    fetch("/videos", {}).then(function (response) {
+    fetch("/videos", {youtube_links}).then(function (response) {
           return response.json();
       }).then(function (text) {
           console.log('POST response:');
           var links = text.links;
           youtube_links = links;
           console.log(youtube_links);
-          localStorage.setItem("links", youtube_links);
+          localStorage.links = youtube_links;
           getVideoData();
       });
 }

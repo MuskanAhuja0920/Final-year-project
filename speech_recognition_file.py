@@ -12,14 +12,11 @@ def convert_speech_to_text():
         audio = r.record(source)
     try:
         print("The audio file contains: " + r.recognize_google(audio, language='en-IN'))
+        return r.recognize_google(audio)
 
     except sr.UnknownValueError:
         print("Google Speech Recognition could not understand audio")
-
+        return "Error"
     except sr.RequestError as e:
         print("Could not request results from Google Speech Recognition service; {0}".format(e))
-
-    return r.recognize_google(audio)
-
-
-
+        return "Error"
